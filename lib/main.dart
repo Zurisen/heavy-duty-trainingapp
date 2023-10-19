@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
 import 'package:heavydutyapp/routes.dart';
+import 'package:heavydutyapp/screens/home/home.dart';
 import 'package:heavydutyapp/theme.dart';
 
 void main() {
@@ -35,14 +36,12 @@ class _AppState extends State<MyApp> {
       builder: (context, snapshot) {
 
         // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
+            home: HomeScreen(),
             routes: appRoutes,
             theme: appTheme,
           );
-        } else {
-          return Text('error');
-        }
+
 
       },
     );
