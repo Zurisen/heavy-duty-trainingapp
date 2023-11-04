@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:heavydutyapp/routes.dart';
 import 'package:heavydutyapp/screens/home/home.dart';
 import 'package:heavydutyapp/theme.dart';
+import 'firebase_options.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,24 +27,35 @@ class MyApp extends StatefulWidget {
 class _AppState extends State<MyApp> {
   /// The future is part of the state of our widget. We should not call `initializeApp`
   /// directly inside [build].
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire:
-      future: _initialization,
-      builder: (context, snapshot) {
+    return MaterialApp(
+      home: FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+              return Scaffold(
+                body: Center(
+                  child: Text('Firebase initialization error: ${snapshot.error}'),
+                ),
+              );
+          }
 
-        // Once complete, show your application
-          return MaterialApp(
-            home: HomeScreen(),
-            routes: appRoutes,
-            theme: appTheme,
-          );
+          if (snapshot.connectionState == ConnectionState.done) {
+            // Once complete, show your application
+            return const HomeScreen();
+          }
 
-
-      },
+          // Otherwise, show something whilst waiting for initialization to complete
+          return const CircularProgressIndicator(); // or any other loading indicator
+        },
+      ),
+      routes: appRoutes,
+      theme: appTheme,
     );
   }
 }
