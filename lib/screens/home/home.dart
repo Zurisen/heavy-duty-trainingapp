@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         } else if (snapshot.hasData) {
           return Home();
         } else {
-          return LoginScreen();
+          return const LoginScreen();
         }
       },
     );
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 _currentIndex = index;
               });
             },
-            children: [
+            children: const [
               ExercisesScreen(),
               ProfileScreen(),
               WorkoutsScreen()
