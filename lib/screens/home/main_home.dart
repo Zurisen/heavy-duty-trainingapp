@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:heavydutyapp/screens/exercises/exercises.dart';
 import 'package:heavydutyapp/screens/profile/profile.dart';
+import 'package:heavydutyapp/screens/templates/templates.dart';
 import 'package:heavydutyapp/screens/workouts/workouts.dart';
 
 class MainHomeScreen extends StatefulWidget {
@@ -40,8 +41,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           },
           children: const [
             ExercisesScreen(),
-            ProfileScreen(),
-            WorkoutsScreen()
+            WorkoutsScreen(),
+            TemplatesScreen()
           ],
         )
       ),
