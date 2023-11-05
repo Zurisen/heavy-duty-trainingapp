@@ -11,22 +11,22 @@ class AuthService {
     await FirebaseAuth.instance.signOut();
   }
 
-    Future<void> googleLogin() async {
-    try {
-      final googleUser = await GoogleSignIn().signIn();
+  Future<void> googleLogin() async {
+  try {
+    final googleUser = await GoogleSignIn().signIn();
 
-      if (googleUser == null) return;
+    if (googleUser == null) return;
 
-      final googleAuth = await googleUser.authentication;
-      final authCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+    final googleAuth = await googleUser.authentication;
+    final authCredential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
 
-      await FirebaseAuth.instance.signInWithCredential(authCredential);
-    } on FirebaseAuthException catch (e) {
-        // handle error
-    }
+    await FirebaseAuth.instance.signInWithCredential(authCredential);
+  } on FirebaseAuthException catch (e) {
+      // handle error
   }
+}
   
 }
