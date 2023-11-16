@@ -12,19 +12,8 @@ class TrainingScreen extends StatelessWidget {
       color: Colors.white12,
       child: Column(
         children: <Widget>[
-          AppBar(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            child: SizedBox(
-              width: double.maxFinite,
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Some Workout',
-                ),
-              ),
-            )
-          ),
+          AppBar(backgroundColor: Colors.white12,),
+
           TrainingExercise()
           ]
         ),

@@ -128,38 +128,51 @@ class DotsMenuButton extends StatelessWidget {
 }
 
 class ActionHeaderWithDotsMenu extends StatelessWidget {
-  final String text;
-  final Color color;
-  final VoidCallback? onDotsPress;
+  final String buttonText;
 
   const ActionHeaderWithDotsMenu({
     Key? key,
-    required this.text,
-    required this.color,
-    this.onDotsPress,
+    required this.buttonText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      color: color,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10), // Symmetric padding
+      child: Stack(
+        alignment: Alignment.centerRight,
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
+          // Full-width TextButton
+          TextButton(
+            onPressed: () => print('ButtonBar pressed'), // Placeholder function
+            style: TextButton.styleFrom(
+              primary: Colors.white, // Text color
+              backgroundColor: Colors.white12, // Button background color
+              padding: EdgeInsets.zero, // Remove default padding
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduce tap target size
+            ),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 16), // Padding for text
+              child: Text(buttonText),
             ),
           ),
-          IconButton(
-            icon: Icon(FontAwesomeIcons.ellipsisV, color: Colors.white),
-            onPressed: onDotsPress,
+
+          // IconButton positioned to the right
+          Positioned(
+            right: 0,
+            child: IconButton(
+              icon: Icon(Icons.more_vert, color: Colors.white), // Three dots icon with white color
+              onPressed: () => print('Dots button pressed'), // Placeholder function
+              padding: EdgeInsets.all(12), // Padding around the icon
+              constraints: BoxConstraints(), // Remove any constraints
+            ),
           ),
         ],
       ),
     );
   }
 }
+
+
+
