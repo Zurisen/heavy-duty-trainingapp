@@ -14,7 +14,7 @@ class TrainingScreen extends StatelessWidget {
         children: <Widget>[
           AppBar(backgroundColor: Colors.white12,),
 
-          TrainingExercise()
+          TrainingExercise(trainingExerciseName: "Some Exercise",)
           ]
         ),
     );

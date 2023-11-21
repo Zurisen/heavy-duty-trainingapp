@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class TrainingSet extends StatefulWidget {
   final int setNumber;
-  final String cloudData;
+  final String prevSet;
+  final VoidCallback onRemove; //Callback for removal
 
   TrainingSet({
     Key? key,
     required this.setNumber,
-    required this.cloudData,
+    required this.prevSet,
+    required this.onRemove,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class _TrainingSetState extends State<TrainingSet> {
   @override
   void initState() {
     super.initState();
-    firstInputController = TextEditingController();
+    firstInputController = TextEditingController(); // these should be handled outside this class
     secondInputController = TextEditingController();
   }
 
@@ -49,7 +51,7 @@ class _TrainingSetState extends State<TrainingSet> {
             // Display data from the cloud with margin
             Container(
               margin: EdgeInsets.symmetric(horizontal: 4),
-              child: Text(widget.cloudData),
+              child: Text(widget.prevSet),
             ),
       
             // First input field with margin
@@ -57,12 +59,14 @@ class _TrainingSetState extends State<TrainingSet> {
               flex: 2, // Adjust flex factor as needed
               child: Container(
                 width: 80,
+                height: 30,
                 margin: EdgeInsets.symmetric(horizontal: 4),
                 child: TextFormField(
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white70),
                   controller: firstInputController,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(vertical: 25),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide.none,
@@ -80,12 +84,14 @@ class _TrainingSetState extends State<TrainingSet> {
               flex: 2, // Adjust flex factor as needed
               child: Container(
                 width: 80,
+                height: 30,
                 margin: EdgeInsets.symmetric(horizontal: 4),
                 child: TextFormField(
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white70),
                   controller: secondInputController,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(vertical: 25),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                       borderSide: BorderSide.none,
@@ -108,6 +114,15 @@ class _TrainingSetState extends State<TrainingSet> {
                   // Define the action when the button is pressed
                   print('Tick button pressed');
                 },
+              ),
+            ),
+
+            // IconButton with a cross icon and margin
+            Container(
+            width: 40,
+              child: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: widget.onRemove
               ),
             ),
           ],
